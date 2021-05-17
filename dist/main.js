@@ -16,6 +16,6 @@ app.handle('start_scene_initial_prompt', function (conv) {
 });
 var expApp = express_1.default();
 expApp.use(express_1.default.json(), app);
-expApp.listen(3000, function () {
+expApp.listen(process.env.PORT || 6000, function () {
     console.log('App listening');
 });

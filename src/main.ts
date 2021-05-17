@@ -16,6 +16,6 @@ app.handle('start_scene_initial_prompt', (conv) => {
 
 const expApp = express();
 expApp.use(express.json(),app);
-expApp.listen(3000,()=>{
+expApp.listen(process.env.PORT || 6000,()=>{
   console.log('App listening');
 });
