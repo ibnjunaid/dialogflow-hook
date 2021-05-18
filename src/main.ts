@@ -1,18 +1,25 @@
-
 import express from 'express';
+import {
+  dialogflow,
+  Image
+} from 'actions-on-google'
 
-import  {conversation}  from'@assistant/conversation';
-
-const app = conversation({
+const app = dialogflow({
   debug : true
 });
 
-app.handle('start_scene_initial_prompt', (conv) => {
-  console.log('Start scene: initial prompt');
-  conv.overwrite = false;
-  conv.scene.next = { name: 'actions.scene.END_CONVERSATION' };
-  conv.add('Hello world from fulfillment');
-});
+app.intent('Default Welcome Intent', conv => {
+  conv.ask('Hi, how is it going?')
+  conv.ask(`Here's a picture of a cat`)
+  conv.ask(new Image({
+    url: 'https://developers.google.com/web/fundamentals/accessibility/semantics-builtin/imgs/160204193356-01-cat-500.jpg',
+    alt: 'A cat',
+  }))
+})
+
+app.catch((conv) =>{
+  conv.close('Theres some glitch');
+})
 
 const expApp = express();
 expApp.use(express.json(),app);
