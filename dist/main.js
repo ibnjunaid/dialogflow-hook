@@ -16,6 +16,14 @@ app.intent('Default Welcome Intent', function (conv) {
         alt: 'A cat',
     }));
 });
+app.intent('listAppointsByDist', function (conv) {
+    conv.ask("so you selected district " + conv.parameters.dist + " in state " + conv.parameters.state);
+    conv.followup('age');
+});
+app.intent('listAppointsByPin', function (conv) {
+    conv.ask("so you selected Pin " + conv.parameters.pin_number);
+    conv.followup('age');
+});
 app.catch(function (conv) {
     conv.close('Theres some glitch');
 });

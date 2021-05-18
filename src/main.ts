@@ -17,6 +17,17 @@ app.intent('Default Welcome Intent', conv => {
   }))
 })
 
+app.intent('listAppointsByDist',(conv) =>{
+  conv.ask(`so you selected district ${conv.parameters.dist} in state ${conv.parameters.state}`);
+  conv.followup('age');
+})
+
+app.intent('listAppointsByPin',(conv) =>{
+  conv.ask(`so you selected Pin ${conv.parameters.pin_number}`);
+  conv.followup('age');
+})
+
+
 app.catch((conv) =>{
   conv.close('Theres some glitch');
 })
